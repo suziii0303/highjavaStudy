@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+         
+<!-- namespace속성에 지정되는 값은
+    이곳에 작성된 SQL문을 호출해서 사용할 때 같이 사용되는 이름이다 -->
+<mapper namespace ="mymember">
+	<select id="memberList" resultType="mymemVo">
+		select mem_id, mem_pass, mem_name, mem_tel, mem_addr
+		from mymember		
+	</select>
+	
+	<select id="memInfo" resultType="mymemVo" parameterType="String">
+		select * from mymember where mem_id = #{mem_id} 
+	</select>
+	
+	<insert id="insertMember" parameterType="mymemVo">
+		insert into mymember(mem_id, mem_pass, mem_name, mem_tel, 
+		mem_addr, mem_photo)
+		values (#{mem_id},#{mem_pass},#{mem_name},#{mem_tel},
+		#{mem_addr},#{mem_photo})
+	</insert>
+	
+	<select id="checkId" resultType="String" parameterType="String">
+		select mem_id from mymember where mem_id= #{data}
+	</select>
+	
+	<update id="updateMember" parameterType="mymemVo" >
+		update mymember set mem_pass = #{mem_pass} , mem_name = #{mem_name} , mem_tel = #{mem_tel} ,
+		mem_addr = #{mem_addr} , mem_photo = #{mem_photo} where mem_id = #{mem_id}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+	 	DELETE FROM mymember WHERE mem_id = #{mem_id}
+	 </delete>
+	
+</mapper>

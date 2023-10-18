@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+         
+<!-- namespace속성에 지정되는 값은
+    이곳에 작성된 SQL문을 호출해서 사용할 때 같이 사용되는 이름이다 -->
+<mapper namespace ="fileinfo">
+
+	<!-- 파일정보 insert하기 -->
+	<insert id="insertFileinfo" parameterType="fileVo">
+		insert into fileinfo (file_no, file_writer, origin_file_name, save_file_name, file_size, file_date)
+		values (fileinfo_seq.nextval, #{file_writer}, #{origin_file_name}, #{save_file_name}, #{file_size}, sysdate)
+	</insert>
+	
+	<!-- 전체목록 가져오기 -->
+	<select id="getAllFileinfo" resultType="fileVo">
+		select * from fileinfo
+	</select>
+	
+	<!-- 파일 번호를 이용하여 검색하기 -->
+	<select id="getFileinfo" parameterType="int" resultType="fileVo">
+		select * from fileinfo
+		where file_no =#{file_no}
+	</select>
+</mapper>

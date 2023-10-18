@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+         
+<!-- namespace속성에 지정되는 값은
+    이곳에 작성된 SQL문을 호출해서 사용할 때 같이 사용되는 이름이다 -->
+<mapper namespace ="mymember">
+	<select id="getLoginMember" parameterType="memVo" resultType="memVo">
+		select * from mymember
+		where mem_id=#{mem_id} and mem_pass=#{mem_pass}
+	</select>
+</mapper>
